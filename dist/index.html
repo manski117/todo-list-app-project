@@ -5,6 +5,169 @@
     <title>ToDoList App Vanilla Webpack</title>
   <meta name="viewport" content="width=device-width, initial-scale=1"><script defer src="bundle.js"></script></head>
   <body>
-    <h1 class="goofy">can I hard code things into html again?</h1>
+    <header id="header" class="flexbox">
+      <div></div>
+      <h1>To-Do-List App</h1>
+      <div class="menu-toggle">
+          <img id="navClosed" class ="navIcon " src="https://img.icons8.com/ios-filled/50/null/menu--v1.png" alt="">
+          <img id="navOpen" class ="navIcon hidden"src="https://img.icons8.com/ios-filled/50/null/delete-sign--v1.png" alt="">
+      </div>
+  </header>
+  <div id="main-content" class = "flexbox">
+      <div id="current-project" class="flexbox">
+          <div class="project-header">Select a project to get started</div>
+          <div class="project-tasks flexbox">
+               
+          </div>
+
+          <div id="add-new-task" class="flexbox form-hide-btn">
+              <div class="new-task-button btn"><img class="icon" src="https://img.icons8.com/ios-filled/50/null/plus-2-math.png" alt="adds a new task to a project"></div>
+              <h3>Add new task</h3>
+
+          </div>
+          <!-- form for a NEW task -->
+          <form id="task-form" class="task-form">
+              <div class="input-wrapper">
+                <label for="task-title">Task:</label>
+                <input class="input-box" type="text" id="task-title-input" title="Type your task name here." placeholder="What is the task or event you need to do?" minlength="1" maxlength="20" required>
+                <div class="validation-block">
+                  <p id="task-title-error" class="validation-text title-val" style="display: block;"></p>
+                </div>
+              </div>
+              <div class="input-wrapper">
+                <label for="date-input">Deadline:</label>
+                <input class="input-box" type="text" id="date-input" title="Type the date here." placeholder="mm/dd/yy" minlength="10" maxlength="10" required>
+                <div class="validation-block">
+                  <p id="task-date-error" class="validation-text date-val" style="display: block;"></p>
+                </div>
+              </div>
+              <div class="input-wrapper">
+                  <label for="description-input">Details:</label>
+                  <textarea id="description-input" class="input-box" textarea="" placeholder="Write a description of your task or event *" id="comment" name="comment" cols="45" rows="8" maxlength="180"></textarea>
+                  <div class="validation-block">
+                      <p id="task-description-error" class="validation-text description-val" style="display: block;"></p>
+                    </div>
+              </div><br>
+      
+              <div class="input-wrapper">
+                  <input type="submit" id="submit-button"  class="btn" form="task-form" value="Add task">
+                  <div class="validation-block">
+                    <p class="validation-text form-val" style="display: none;">Please fill out all required feilds</p>
+                  </div>
+              </div>
+              
+          </form>
+          
+      </div> 
+      <div id="projects-sidebar" class="flexbox">
+          <div id="projects-menu-title">Projects</div>
+          <div class="flexbox projects-menu">
+             
+          </div>
+
+          <!-- Form for a NEW project obj -->
+          <form id="project-form" class="project-form">
+              <div class="input-wrapper">
+                <label for="project-name">Project Name:</label>
+                <input class="input-box" type="text" id="project-name" title="Enter project name." placeholder="Enter project name" minlength="1" maxlength="18" required>
+                <div class="validation-block">
+                  <div id="project-name-error" class="validation-text proj-val error" style="display: block;"></div>
+                </div>
+              </div><br>
+      
+              <div class="input-wrapper">
+                  <input type="submit" id="add-project-button"  class="btn" form="project-form" value="Add project">
+                  <div class="validation-block">
+                    <p class="validation-text form-val" style="display: none;">Please fill out all required feilds</p>
+                  </div>
+              </div>
+              
+          </form>
+          <div id="add-new-project" class="flexbox form-hide-btn">
+              <div class="new-project-button btn"><img class="icon" src="https://img.icons8.com/ios-filled/50/null/plus-2-math.png" alt="adds a new task to a project"></div>
+              <h3>Add new project</h3>
+          </div>
+
+      </div> 
+  </div>
+  <footer id="footer" class="flexbox">
+    <h3 class="credit-text">A portfolio poject by <a href="https://github.com/manski117">@manski117</a></h3>
+    <h3 class="credit-text">Made using ES6, html, css and webpack</h3>
+  </footer>
+
+  <!-- EDIT MODALS (should always be hidden unless activated) -->
+  <!-- Modal to Edit Project -->
+  <div id="modal-edit-project" class="modal">
+      <div class="modal-header">
+          <div class="modal-title">Edit Project</div>
+          <button data-close-button class="close-button">&times;</button>
+      
+      </div>
+      <div class="modal-body">
+          <!-- This form lets you edit an existing project -->
+          <form id="project-edit-form" class="project-form form-active">
+              <div class="input-wrapper">
+                <label for="new-project-name">Edit Project Name:</label>
+                <input class="input-box" type="text" id="new-project-name" title="Enter project name." placeholder="Change project name" minlength="1" maxlength="18" required>
+                <div class="validation-block">
+                  <p id="project-edit-name-error" class="validation-text proj-val" style="display: block;"></p>
+                </div>
+              </div><br>
+              <div class="input-wrapper">
+                  <input type="submit" id="rename-project"  class="btn" form="project-edit-form" value="Rename">
+                  <div class="validation-block">
+                    <p class="validation-text form-val" style="display: none;">Please fill out all required feilds</p>
+                  </div>
+              </div>
+      
+          </form>
+      </div>
+  </div>
+
+  <!-- Modal to Edit Task -->
+  <div id="modal-edit-task" class="modal">
+      <div class="modal-header">
+          <div class="modal-title">Edit Task</div>
+          <button data-close-button class="close-button">&times;</button>
+      
+      </div>
+      <div class="modal-body">
+          <!-- This form lets you edit an existing task -->
+          <form id="task-edit-form" class="task-form form-active">
+              <div class="input-wrapper">
+                <label for="edit-task-title-input">Task:</label>
+                <input class="input-box" type="text" id="edit-task-title-input" title="Type your new task name here." placeholder="What is the task or event you need to do?" minlength="1" maxlength="20" required>
+                <div class="validation-block">
+                  <p id ="task-title-edit-error" class="validation-text title-val" style="display: block;"></p>
+                </div>
+              </div>
+              <div class="input-wrapper">
+                <label for="edit-date-input">Deadline:</label>
+                <input class="input-box" type="text" id="edit-date-input" title="Type the date here." placeholder="mm/dd/yy" minlength="10" maxlength="10" required>
+                <div class="validation-block">
+                  <p id ="date-edit-error" class="validation-text date-val" style="display: block;"></p>
+                </div>
+              </div>
+              <div class="input-wrapper">
+                  <label for="edit-description-input">Details:</label>
+                  <textarea id="edit-description-input" class="input-box" textarea="" placeholder="Write a description of your task or event *" id="comment" name="comment" cols="45" rows="8" maxlength="180"></textarea>
+                  <div class="validation-block">
+                      <p id ="description-edit-error" class="validation-text description-val" style="display: block;"></p>
+                    </div>
+              </div><br>
+      
+              <div class="input-wrapper">
+                  <input type="submit" id="edit-submit-button"  class="btn" form="task-form" value="Update task">
+                  <div class="validation-block">
+                    <p class="validation-text form-val" style="display: none;">Please fill out all required feilds</p>
+                  </div>
+              </div>
+              
+          </form>
+      </div>
+  </div>
+
+
+<div id="overlay" class="overlay"></div>
   </body>
 </html>

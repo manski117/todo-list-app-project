@@ -1,7 +1,498 @@
-.hello {
-    color: rgb(48, 35, 193);
-}
-
-.goofy{
-    color: #52d3e4
-}
+/* font stuff */
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+  }
+  
+  /* layout stuff */
+  .flexbox{
+    display: flex;
+    
+  }
+  
+  body{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  #header{
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center; 
+    background-color: #2C7958;
+    width: 100%;
+    
+  }
+  
+  h1{
+    font-size: 3rem;
+    padding: 0;
+    margin: 1rem;
+    color: #7DB49C;
+  }
+  .menu-toggle img{
+    height: 3rem;
+    width: 3rem;
+  }
+  
+  
+  #main-content{
+    flex-direction: row;
+    min-height: 80vh;
+    max-height: 200hv;
+    width: 100%;
+    background-color: #2E5472; 
+  }
+  #footer{
+    width: 100%;
+    background-color: #2C7958;
+    flex-direction: column;
+  }
+  #footer h3{
+    color: #ececec;
+    display: block;
+    margin: 0.25rem;
+    padding: 0.25rem;
+    gap: 0.5rem;
+    font-size: 12px;
+  }
+  
+  #current-project{
+    flex-direction: column;
+    min-width: 400px;
+    max-width: 2000px;
+    width: 70%;
+  }
+  
+  .project-header{
+    display: flex;
+    padding: 50px;
+    height: 50px;
+    background-color: #06243B;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    margin: 20px;
+    margin-bottom: 0px;
+    color: #7995AA;
+    width: 90%;
+  }
+  
+  .project-tasks{
+    flex-direction: column;
+    width: 90%;
+    margin: 20px;
+    margin-top: 10px;
+    
+  }
+  
+  i.edit-task{
+    padding: 5px 11px;
+    cursor: pointer;
+    position: relative;
+    /* without position relative, the popup edit buttons would not show up where they need to be */
+  }
+  
+  .task{
+    flex-direction: column;
+    margin-bottom: 10px;
+    background-color: #7995AA; 
+    border-radius: 5px;
+  }
+  .task-data{
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .task-details{
+    margin: 10px;
+    margin-left: 40px;
+    text-align: left;
+    font-size: 16px;
+    word-wrap: break-word;
+  }
+  #add-new-task{
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 5px 20px;
+    width: 90%;
+  /*   margin: 0 auto; */
+    height: 50px;
+    padding: 5px;
+    background-color: #06243B !important;
+    color: #7995AA;
+    border-radius: 5px;
+    cursor: pointer;
+  /*   width: fit-content; */
+    justify-content: center;
+    align-items: center;
+    
+  }
+  #add-new-task img{
+    height: 30px;
+    width: 30px;
+  }
+  
+  
+  
+  #projects-sidebar{
+    flex-direction: column;
+    width: 30%;
+    min-width: 200px;
+    align-items: center;
+    background-color: #669D39;
+    display: block;
+    padding: 0.5rem;
+    color: #BFE59F;
+  }
+  
+  #projects-menu-title{
+    background-color: #265202;
+    padding: 30px;
+    height: 80px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    width: 95%;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .projects-menu{
+    flex-direction: column;
+    width: 95%;
+    justify-content: center;
+    gap: 10px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  
+  .project-menu-item{
+    height: 40px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .project-title{
+    font-size: 18px;
+    width: 60%;
+    text-align: center;
+  }
+  
+  .project-menu-item .icon{
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .edit-button{
+    margin-top: 6px;
+  }
+  
+  /* button stuff*/
+  
+  #add-new-project {
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    background-color: #265202;
+    border-radius: 5px;
+    padding: 3px 13px;
+    margin-top: 10px;
+    transform: scale(0.8);
+    cursor: pointer;
+    width: fit-content;
+    margin: auto;
+    margin-top: 1rem;
+  }
+  #add-new-project h3{
+    font-size: 16px;
+  }
+  
+  #add-new-project div img{
+    height: 20px;
+    width: 20px;
+  }
+  
+  #submit-button{
+    color: #7995AA;
+  }
+  
+  /*Edit button stuff*/
+  .edit-button{
+    position: relative;
+  }
+  .edit-button.active .edit-option {
+      display: flex;
+      pointer-events: auto;
+  
+  }
+  
+  .edit-task.active .edit-option {
+    display: flex;
+    pointer-events: auto;
+  
+  }
+  .edit-option{
+    display: none;
+    pointer-events: none;
+    flex-direction: column;
+    position: absolute;
+    bottom: 30px;
+    right: 10px;
+    z-index: 3;
+    padding: 5px;
+    
+  }
+  
+  /*Form stuff*/
+  input, label {
+      display:block;
+  /*This allows the labels and input boxes to be on top of each other*/
+  }
+  
+  form .btn{
+    display: inline;
+  }
+  
+  #project-form{
+    margin: 1rem;
+    width: 100%;
+    padding: 3px;
+    background-color: #91C367;
+    border-radius: 5px;
+  }
+  
+  #project-form:hover{
+    filter: brightness(111%);
+  }
+  #project-form input[type="submit"]{
+    cursor: pointer;
+    background-color: #437818;
+    border: none;
+    border-radius: 5px;
+  }
+  input[type="submit"]:hover{
+    filter: brightness(150%);
+  }
+  
+  form input{
+    margin: 0 0 1px 0;
+  }
+  
+  .task-form label{
+    margin: 20px 0 0 0;
+  }
+  .task-form [for="task-title"]{
+    margin: 0;
+  /*This ensures that while the rest of the labels will have negative space above them for feedback text, this top one does not need it and thus will not have useless negative space*/
+  }
+  
+  
+  #project-form input, #project-edit-form input{
+    font-size: 1rem;
+    height: 2rem;
+  }
+  #project-form label, #project-edit-form label{
+    font-weight: 600;
+  }
+  
+  #task-form{
+    margin: 1rem;
+    width: 90%;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #7995AA;
+  }
+  
+  .task-form label{
+    font-weight: 600;
+  }
+  #task-form input[type="submit"]{
+    background-color: #06243B;
+  }
+  
+  .task-form input, #task-edit-form input, .task-form textarea, #task-edit-form textarea{
+    width: 100%;
+  }
+  
+  #task-form:hover{
+    filter: brightness(111%);
+  }
+  
+  /* interactive stuff */
+  .hidden{
+    display: none !important;
+  }
+  
+  .task-form{
+    display: none;
+  }
+  .project-form{
+    display: none;
+    
+  }
+  
+  .form-active{
+    display: block;
+  }
+  
+  form input:focus, form textarea:focus{
+    box-shadow: 0 0 10px #719ECE;
+    outline: none;
+  /*Turns boxes this color when you click inside them*/
+  }
+  
+  form input[type="text"]:invalid{
+    border: 1px solid #b92326;  
+    outline: none;
+  /*Turns boxes this color when they are invalid*/
+  }
+  
+  form input[type="text"]:focus:invalid{
+    border: 1px solid red ;
+    box-shadow: 0 0 10px #719ECE;
+    outline: none ;
+  /*Turns boxes this color when they are invalid AND focused*/
+  }
+  
+  form input[type="text"]:valid{
+    border: 1px solid #8BC34A;
+    
+    /*Style of an input if it is valid even after you have left it*/
+  }
+  
+  form input[type="text"]:focus:valid{
+    border: 2px solid #8BC34A;
+  /*Style of an input if it is valid AND focused*/
+  }
+  
+  
+  /* Dynamic User Interface */
+  .edit-button, .project-title{
+    cursor: pointer;
+  }
+  .form-hide-btn:hover{
+    filter: brightness(150%);
+  }
+  
+  .project-title:hover{
+    text-shadow: gold 1px 1px 12px;
+    outline: none; 
+  }
+  
+  .project-menu-item{
+    background-color: #669D39;
+  }
+  
+  .project-menu-item:hover{
+    filter: brightness(111%);
+  }
+  
+  .navIcon{
+    cursor: pointer;
+  }
+  
+  .validation-text{
+    color: red;
+    font-style: italic;
+    font-size: 0.9rem;
+    margin: 0;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  
+  .edit-option button{
+    cursor: pointer;
+    font-size: 18px;
+    padding: 5px;
+  }
+  .edit-option button:hover{
+    filter: brightness(75%);
+  }
+  
+  .task:hover{
+    filter: brightness(111%);
+  }
+  
+  
+  
+  /* modal stuff */
+  .modal{
+    position: fixed;
+  /*'fixed' keeps the modal scrolling with the user*/
+    top: 50%;
+    left: 50%;
+  /*Center relative to the screen*/
+    /*Then move 50% relative to the size of the container so it is perfectly centered. Top and left move the top left corner of the modal */
+    transform: translate(-50%, -50%) scale(0);
+  /*Scale of 0 'hides' the modal until it is active and scale is set to 1*/
+    transition: 100ms ease-in-out;
+    border: 1px solid black;
+    border-radius: 10px;
+    z-index: 10;
+  /*Give a high z index to make sure it draws above everything else*/
+    width: 500px;
+    max-width: 80%;
+    background-color: white;
+  /*This will make it stand out when the overlay shade pops up*/
+    
+  }
+  
+  .modal.active{
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .modal-header{
+    padding: 10px 15px;
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+  /*border-bottom essentially makes an underline*/
+  }
+  
+  .modal-header .modal-title{
+    font-size: 2rem;
+  }
+  
+  .modal-header .close-button{
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+  /*Setting all these to none because we just want to see an "X", not a big ugly button*/
+    font-size: 1.2rem;
+    font-weight: 1000;
+  }
+  
+  .modal-body{
+    padding: 10px 15px;
+  }
+  
+  #overlay{
+  /*This will make a translucent shade appear over screen*/
+    position: fixed;
+    opacity: 0;
+    transition: 100ms ease-in-out;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.5);
+    pointer-events: none;
+  /*this makes it so the overlay will not get in the way of our mouse clicks and so we can still click buttons on the page*/
+  }
+  
+  #overlay.active{
+    opacity: 1;
+    pointer-events: all;
+  /*This will make it visible when toggled*/
+  }
+  
